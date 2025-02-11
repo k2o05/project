@@ -1,5 +1,27 @@
-<m-container>
-<br><br>
-Home Page
-</m-container>
+<m-container class="container-fluid">
+    <nav class="nav">
+      <h2 class="logo">Take My Stuff!</h2>
+      <ul>
+        <li><div><button class="tms" (click)="navigateToServices()">Services</button></div></li>
+        <li><div><button class="tms"(click)="navigateToPolicy()">Privacy Policy</button></div></li>
+      </ul>
+      <button (click)="navigateToSignLogin()"class="tms">Take My Stuff!</button>
+    </nav>
+    <div class="content">
+      <h3>LOGISTICS SERVICES</h3>
+      <h1>Need to donate? We are the website you need!</h1>
+      <div class="content-buttons">
+        <button (click)="navigateToAbout()"class="read-more">Read More</button>
+      <m-container class="daily-feed">
+            <h2>Daily Feed</h2>
+            <m-card *ngFor="let listing of listings" [header]="listing.title">
+              <p>{{ listing.description }}</p>
+              <span class="listing-time">Posted: {{ listing.time }}</span>
+            </m-card>
+        </m-container>
+      </div>
+    </div> 
+  </m-container>
+
+
 

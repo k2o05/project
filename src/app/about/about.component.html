@@ -1,0 +1,17 @@
+<m-container class="summary-section">
+    <h1>About Us</h1>
+    <p>We are a website dedicated in making donations simple, after signing up and adding some key information required, you will be able to post anything you wish to give away to the communuty. This platform promotes sustainability, by reducing waste and giving back to the community, we can, one step at a time, make useful items accessible to everyone around us and at the same time reduce our carbon footprint.</p>  
+    <div class="benefits">
+      <m-card class="card" [header]="'Easy to Use Interface'">
+        <p>Using our website is fairly simple, after sigining up, simply list the items you wish to give away and add your timing and location, and we will do the rest! So what are you waiting for? Simply click the button bellow and enjoy a seamless process!</p>        <button (click)="navigateToSignLogin()"class="tms">Take My Stuff!</button>
+    </m-card>
+  
+      <m-card class="card" [header]="'Completely Free'">
+        <p>Yes, that is right! Using our website services is completley free of hidden fees or charges, the only thing you have to do is list your items and share freely!</p>
+      </m-card>
+    </div>
+  
+    <div class="home">
+      <button (click)="navigateToHome()" class="tms">Home Page</button>
+    </div>
+  </m-container>
