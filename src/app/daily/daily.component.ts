@@ -29,7 +29,9 @@ export class DailyComponent {
     {
       
     }
-  
+    navigateToDonate(){
+      this.router.navigate(['/donate'])
+    }
     navigateToAbout()
     {
       this.router.navigate(['/about'])

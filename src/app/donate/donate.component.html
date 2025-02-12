@@ -1,0 +1,26 @@
+<m-container>
+    <form>
+      <label for="itemName">Item Name:</label>
+      <input id="itemName" [(ngModel)]="anItem.itemName" name="anItem.itemName" type="string" />
+      <label for="itemDescription">Item Description:</label>
+      <textarea
+        id="itemDescription"
+        [(ngModel)]="anItem.itemDesc"
+        name="anItem.itemDesc"
+      ></textarea>
+
+      <label for="availability">Availability</label>
+      <input id="itemName" [(ngModel)]="anItem.availability" name="anItem.availability" type="string" />
+  
+      <button type="button" (click)="getPosition()">Get your Location</button>
+      <p *ngIf="anItem">
+        Location: 
+        Latitude: {{ anItem.latitude }},
+        Longitude: {{ anItem.longitude }}
+      </p>
+  
+      <button type="button" (click)="submitForm()">Submit</button>
+    </form>
+    <br><br>
+    <div #map id="map"></div>
+</m-container>

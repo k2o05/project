@@ -9,6 +9,7 @@ import {
   remove,
   push,
   DataSnapshot,
+  onValue,
 } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 
@@ -35,16 +36,64 @@ export class FirebaseService {
   }
   setupFirebase() {
     const firebaseConfig = {
-      apiKey: "AIzaSyCnk5pXctfgwgN_JPjTT0Zfblwhdy21_wQ",
-      authDomain: "cen333db.firebaseapp.com",
-      databaseURL: "https://cen333db-default-rtdb.firebaseio.com",
-      projectId: "cen333db",
-      storageBucket: "cen333db.appspot.com",
-      messagingSenderId: "223377335324",
-      appId: "1:223377335324:web:039a6f8e5605e38c93ebd9",
-      measurementId: "G-DDRD83DX4Z"
+      apiKey: "AIzaSyAyw6qMxzlqZeMFFOGFTM007FBq-kzKxlU",
+      authDomain: "persistence-61e9f.firebaseapp.com",
+      databaseURL: "https://persistence-61e9f-default-rtdb.firebaseio.com",
+      projectId: "persistence-61e9f",
+      storageBucket: "persistence-61e9f.firebasestorage.app",
+      messagingSenderId: "641299140472",
+      appId: "1:641299140472:web:b6b731969269b0f59b028d",
+      measurementId: "G-LPPVJSE96V"
     };
     initializeApp(firebaseConfig);
+  }
+
+  storeItemService(key: string, object: any)
+  {
+    set(ref(this.db, key), object);
+  }
+
+  addItemService(key: string, object: any)
+  {
+    const itemRef = ref(this.db, key);
+    push(itemRef, {val1: object.value1, val2: object.value2});
+  }
+
+  getItemService(key: string)
+  {
+    let item: any = null;
+    const itemRef = ref(this.db, key);
+    onValue(itemRef, (data) => 
+    {
+      item = data.val();
+    })
+    return item;
+  }
+
+  getItemsService(key: string)
+  {
+    let list: any[] = [];
+      
+    const listRef = ref(this.db, key);
+    onValue(listRef, (data) => { data.forEach((dataItem) => 
+      {
+        list.push(dataItem);
+      })}
+    );
+      
+    return list;
+  }
+
+  removeItemFromListService(key: string)
+  {
+    const itemRef = ref(this.db, 'items/' + key);
+    remove(itemRef);
+  }
+
+  clearAllItemsService()
+  {
+    set(ref(this.db, "items"), {});
+    set(ref(this.db, "mykey"), {});
   }
 
   // CRUD: Create, Retrieve, Update, Delete 

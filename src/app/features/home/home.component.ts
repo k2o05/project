@@ -18,20 +18,14 @@ export class HomeComponent {
   }
 
   onLogin() {
-    if (this.email && this.password) {
-      console.log('Email:', this.email);
-      console.log('Password:', this.password);
-      this.router.navigate(['/daily']);
-    }
 
-    else if (this.email =="test-user" && this.password == "478f21"){
+    if (this.email =="test-user" && this.password == "478f21"){
       console.log('Email:', this.email);
       console.log('Password:', this.password);
       this.router.navigate(['/daily']);
     }
 
     else return console.error();
-    
 
   }
 }
