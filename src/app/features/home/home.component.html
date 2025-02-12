@@ -1,27 +1,81 @@
-<m-container class="container-fluid">
-    <nav class="nav">
-      <h2 class="logo">Take My Stuff!</h2>
-      <ul>
-        <li><div><button class="tms" (click)="navigateToServices()">Services</button></div></li>
-        <li><div><button class="tms"(click)="navigateToPolicy()">Privacy Policy</button></div></li>
-      </ul>
-      <button (click)="navigateToSignLogin()"class="tms">Take My Stuff!</button>
-    </nav>
-    <div class="content">
-      <h3>LOGISTICS SERVICES</h3>
-      <h1>Need to donate? We are the website you need!</h1>
-      <div class="content-buttons">
-        <button (click)="navigateToAbout()"class="read-more">Read More</button>
-      <m-container class="daily-feed">
-            <h2>Daily Feed</h2>
-            <m-card *ngFor="let listing of listings" [header]="listing.title">
-              <p>{{ listing.description }}</p>
-              <span class="listing-time">Posted: {{ listing.time }}</span>
-            </m-card>
-        </m-container>
+<m-container>
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="email"
+          required
+        />
       </div>
-    </div> 
-  </m-container>
 
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          [(ngModel)]="password"
+          required
+        />
+      </div>
 
+      <button type="button" class="btn" (click)="onLogin()" [disabled]="!loginForm.form.valid">
+       <span>Login</span>
+      </button>
+    </form>
+  </div>
+</div>
+</m-container>
 
+<style>
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e1e1e1;
+  }
+
+  .login-card {
+    background: rgb(255, 255, 255);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+</style>
