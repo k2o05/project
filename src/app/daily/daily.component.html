@@ -8,21 +8,36 @@
       </ul>
     </nav>
 
-    <div class="content">
+    <div class="feed-container">
+
         <h1>Recommended</h1>
-        <m-card *ngFor="let listing of listings" [header]="listing.title">
-          <p>{{ listing.description }}</p>
-          <span class="listing-time">Posted: {{ listing.time }}</span>
-        </m-card>
-    </div>
+
+        <div *ngIf="listofItems.length == 0">
+          <p>No entries found! Add some items to your feed.</p>
+        </div>
+
+
+        <ul>
+
+          <li *ngFor="let item of listofItems;index as i">{{item.itemName}} , {{item.latitude}},{{item.longitude}}</li>
+
+        </ul>
+        
+
     <div class="content">
+
       <h3>LOGISTICS SERVICES</h3>
       <h1>Need to donate? We are the website you need!</h1>
+
       <div class="content-buttons">
         <button (click)="navigateToAbout()"class="read-more">Read More</button>
       </div>
+
     </div> 
-  </m-container>
+
+    </div>
+
+</m-container>
   
   
   

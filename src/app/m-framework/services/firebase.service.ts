@@ -70,10 +70,11 @@ export class FirebaseService {
     return item;
   }
 
+ 
+
   getItemsService(key: string)
   {
     let list: any[] = [];
-      
     const listRef = ref(this.db, key);
     onValue(listRef, (data) => { data.forEach((dataItem) => 
       {

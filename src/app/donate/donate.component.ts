@@ -3,6 +3,7 @@ import { FirebaseService } from '../m-framework/services/firebase.service';
 import { MContainerComponent } from '../m-framework/components/m-container/m-container.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Route, Router } from '@angular/router';
 declare var google:any;
 class Item{
   key:string;
@@ -11,13 +12,16 @@ class Item{
   availability:string;
   latitude:number;
   longitude:number;
-  constructor(key:string,itemName:string,itemDesc:string,availability:string,latitude:number,longitude:number){
+  useremail:string;
+  constructor(key:string,itemName:string,itemDesc:string,availability:string,latitude:number,longitude:number,useremail:string){
     this.key = key;
+
     this.itemName=itemName;
     this.itemDesc=itemDesc;
     this.availability=availability;
     this.latitude=latitude;
     this.longitude=longitude;
+    this.useremail=useremail;
 
   }
 
@@ -36,8 +40,8 @@ export class DonateComponent {
   mapElementRef:any
   anItem:Item;
   listOfItems:Item[]
-  constructor(private firebaseStorage: FirebaseService){
-    this.anItem= new Item("","","","",0,0);
+  constructor(private firebaseStorage: FirebaseService, private router:Router){
+    this.anItem= new Item("","","","",0,0,"");
     this.listOfItems=[];
   }
 
@@ -49,11 +53,6 @@ export class DonateComponent {
         this.anItem.latitude = data.coords.latitude;
         this.anItem.longitude = data.coords.longitude;
         this.loadMap();
-        if(this.anItem != null)//For storing in the fire base
-      {
-        let object = new Item("mykey", this.anItem.itemName, this.anItem.itemDesc,this.anItem.availability,this.anItem.latitude,this.anItem.longitude);
-        this.firebaseStorage.storeItemService("Donations",object)
-      }
       });
     }
   }
@@ -99,27 +98,31 @@ export class DonateComponent {
     return marker;
   }
   
-  ngOnInit(){
-    this.loadMap();
-  }
-
-
  
 
   submitForm(): void {
     if (this.anItem.itemName && this.anItem.itemDesc && this.anItem.latitude && this.anItem.longitude) {
       
       this.listOfItems.push(this.anItem); // Store locally
-      alert('Item submitted successfully!');
-      this.resetForm();
-    } else {
+      if(this.anItem != null)//For storing in the fire base
+      {
+        
+        let object = new Item("donations", this.anItem.itemName, this.anItem.itemDesc,this.anItem.availability,this.anItem.latitude,this.anItem.longitude,this.anItem.useremail);
+
+        this.firebaseStorage.storeItemService("donations",object);
+        alert('Item submitted successfully!');
+      }
+      
+     else {
       alert('Please fill out all fields and fetch the location.');
     }
+
+    this.router.navigate(['/daily']);
+
 
     
   }
 
-  resetForm(){
-    this.anItem = new Item("","","","",0,0);
-  }
+}
+
 }

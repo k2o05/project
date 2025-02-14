@@ -10,9 +10,10 @@
           id="email"
           name="email"
           class="form-control"
-          [(ngModel)]="email"
+          [(ngModel)]="useremail"
           required
         />
+
       </div>
 
       <div class="form-group">
@@ -26,10 +27,9 @@
           required
         />
       </div>
-
-      <button type="button" class="btn" (click)="onLogin()" [disabled]="!loginForm.form.valid">
-       <span>Login</span>
-      </button>
+        <button  type="button" class="btn" (click)="onLogin()" [disabled]="!loginForm.form.valid">
+          <span>Login</span>
+         </button>
     </form>
   </div>
 </div>
